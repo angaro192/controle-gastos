@@ -10,7 +10,8 @@ export class ThemeService {
   theme$ = this.themeSubject.asObservable();
 
   constructor() {
-    const savedTheme = (localStorage.getItem('theme') as Theme) || 'light';
+    const defaultThemeSystem = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    const savedTheme = (localStorage.getItem('theme') as Theme) || defaultThemeSystem;
     this.setTheme(savedTheme);
   }
 

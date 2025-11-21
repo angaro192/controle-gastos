@@ -1,24 +1,34 @@
 import { inject } from "@angular/core";
 import { CanActivateFn, Router } from "@angular/router";
+import { AuthService } from "../shared/services/auth.service";
 
 export const authGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
-  const token = localStorage.getItem("token");
-  if (!token) {
-    toNavigate(router, "/signin");
-    return false;
+  const authService = inject(AuthService);
+  // const token = localStorage.getItem("token");
+
+  if (authService.isAuthenticated()) {
+    return true;
   }
 
-  if (token) {
-    if (!validateTokenExpiration(token)) {
-      localStorage.removeItem("token");
-      toNavigate(router, "/signin");
-      return false;
-    }
-  }
-
-  toNavigate(router, "/signin");
+  router.navigate(["/signin"]);
   return false;
+
+  // if (!token) {
+  //   toNavigate(router, "/signin");
+  //   return false;
+  // }
+
+  // if (token) {
+  //   if (!validateTokenExpiration(token)) {
+  //     localStorage.removeItem("token");
+  //     toNavigate(router, "/signin");
+  //     return false;
+  //   }
+  // }
+
+  // toNavigate(router, "/signin");
+  // return false;
 };
 
 /**

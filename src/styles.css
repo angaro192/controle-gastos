@@ -865,3 +865,6 @@ pre[class*="language-"] {
 pre[class*="language-"].line-numbers {
   padding-left: 2.8em !important;
 }
+.cursor-pointer {
+  cursor: pointer;
+}

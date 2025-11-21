@@ -133,6 +133,20 @@ export const routes: Routes = [
     title:
       "Angular Sign Up Dashboard | TailAdmin - Angular Admin Dashboard Template",
   },
+  {
+    path: "dashboard",
+    component: AppLayoutComponent,
+    canActivate: [authGuard],
+    children: [
+      {
+        path: "",
+        component: EcommerceComponent,
+        pathMatch: "full",
+        title:
+          "Angular Ecommerce Dashboard | TailAdmin - Angular Admin Dashboard Template",
+      },
+    ],
+  },
   // error pages
   {
     path: "**",
